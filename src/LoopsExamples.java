@@ -39,6 +39,10 @@ public class LoopsExamples {
     }
 
     public static void findPerfectNumbers(int limit) {
+        if (limit < 1) {
+            System.out.println("Search limit must be positive intiger!");
+            return;
+        }
         System.out.print("Perfect numbers 1.." + limit + ": ");
         for(int i=1;i<=limit;i++) {
             int divisorSum = 0;
@@ -57,6 +61,10 @@ public class LoopsExamples {
     }
 
     public static void findPrimeNumbersInInterval(int from, int to) {
+        if (from <0 || to<0 || to<from) {
+            System.out.println("Numbers can't be negative, from < to;");
+            return;
+        }
         System.out.printf("\nPrime numbers from %d to %d: ", from, to);
         for(int i = from; i<=to; i++) {
             if(isPrime(i)) {
