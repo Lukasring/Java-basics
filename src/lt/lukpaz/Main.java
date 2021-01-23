@@ -1,3 +1,7 @@
+package lt.lukpaz;
+
+import lt.lukpaz.fizzbuzz.FizzBuzz;
+
 public class Main {
 
     public static void main(String[] args) {

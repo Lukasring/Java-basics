@@ -1,3 +1,5 @@
+package lt.lukpaz.basics;
+
 public class Triangle {
     public static void main(String[] args) {
         int[][] data = {{3, 4, 5},{2, 10, 8},{5, 6, 5},{5, 5, 5}};

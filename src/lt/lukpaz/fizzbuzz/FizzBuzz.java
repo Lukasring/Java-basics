@@ -1,3 +1,5 @@
+package lt.lukpaz.fizzbuzz;
+
 public class FizzBuzz {
     public void printFizzBuzz(int number) {
         if (number < 1) {

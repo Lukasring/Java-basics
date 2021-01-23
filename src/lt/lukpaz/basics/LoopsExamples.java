@@ -1,3 +1,5 @@
+package lt.lukpaz.basics;
+
 public class LoopsExamples {
     public static void main(String[] args) {
         // 1 uzduotis

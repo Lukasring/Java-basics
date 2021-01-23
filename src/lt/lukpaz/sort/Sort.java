@@ -1,3 +1,5 @@
+package lt.lukpaz.sort;
+
 import java.util.Arrays;
 
 public class Sort {
@@ -66,10 +68,6 @@ public class Sort {
         int middleIndex = arr.length/2;
         int[] leftArray = Arrays.copyOfRange(arr, 0,middleIndex);
         int[] rightArray = Arrays.copyOfRange(arr, middleIndex, arr.length);
-//        System.out.print("\nLeft array: ");
-//        printArray(leftArray);
-//        System.out.print("\nRight array: ");
-//        printArray(rightArray);
         int[] sortedLeftArr = mergeSort(leftArray);
         int[] sortedRightArr = mergeSort(rightArray);
 
@@ -114,6 +112,20 @@ public class Sort {
 
 
         return mergedArray;
+    }
 
+    public static String[] sortAlphabetically(String[] words) {
+        String[] stringArray = Arrays.copyOf(words, words.length);
+        for(int i=0; i<stringArray.length; i++) {
+            for(int j=i+1; j<stringArray.length; j++) {
+                if (stringArray[i].compareTo(stringArray[j])>0) {
+                    String temp = stringArray[i];
+                    stringArray[i] = stringArray[j];
+                    stringArray[j] = temp;
+                }
+            }
+        }
+
+        return stringArray;
     }
 }
