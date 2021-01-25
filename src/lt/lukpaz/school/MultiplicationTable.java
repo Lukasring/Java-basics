@@ -23,7 +23,7 @@ public class MultiplicationTable {
         for (int i = min; i<=max; i++) {
             System.out.print("\n");
             for(int j = min; j<=max; j++) {
-                System.out.printf("|%2d * %2d = %-2d|\t", i, j, i*j);
+                System.out.printf("|%2d * %2d = %-3d|\t", i, j, i*j);
             }
         }
     }
