@@ -1,19 +1,16 @@
 package lt.lukpaz.tournament;
 
-public class Player {
-    String name;
+public class Player extends Person{
+    private static int count;
+    private final int id;
+
     public Player(String name) {
-        setName(name);
+        super(name);
+        ++count;
+        id = count;
     }
 
-    public void setName(String name) {
-        if(name.length()<2) {
-            throw new IllegalArgumentException("Name must be at least 2 characters!");
-        }
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 }
