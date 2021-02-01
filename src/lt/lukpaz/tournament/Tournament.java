@@ -14,6 +14,8 @@ public class Tournament {
                 new Player("Gg"),
                 new Player("Hh"),
                 new Player("Ii"),
+                new Player("Jj"),
+                new Player("Kk"),
 
         };
 
@@ -56,15 +58,25 @@ public class Tournament {
         if(!isPowerOfTwo(players.length)) {
             Player[] newPlayers = equalizePlayerArray(currPlayers);
             generateTournamentBracket(newPlayers, round+1);
+        } else {
+            generateTournamentBracket(currPlayers, round);
         }
-        generateTournamentBracket(currPlayers, round);
     }
 
     private static void generateTournamentBracket(Player[] players, int round) {
         if(players.length == 1) {
             return;
         }
-        System.out.println("Round " + round);
+        switch (players.length) {
+            case 2:
+                System.out.println("***** Final *****");
+                break;
+            case 4:
+                System.out.println("*** Semi-Final ***");
+                break;
+            default:
+                System.out.println("* Round " + round + " *");
+        }
         Pair[] pairs = generatePairs(players);
         printPairMatchups(pairs);
         Player[] nextRoundPlayers = generateNextRoundPlayers(pairs);
@@ -77,7 +89,7 @@ public class Tournament {
         Pair[] pairs = new Pair[numberOfPairs];
         for(int i = 0; i<numberOfPairs; i++) {
             int ind = 2 * i;
-            pairs[i] = new Pair(players[i], players[i+1]);
+            pairs[i] = new Pair(players[ind], players[ind+1]);
         }
         return pairs;
     }
@@ -91,21 +103,27 @@ public class Tournament {
     }
 
     static Player[] equalizePlayerArray(Player[] players) {
-        int nextRoundPlayers = closestLowerPowOfTwo(players.length);
-        int noOfPlayerToPlay = players.length - nextRoundPlayers;
-        Player[] newPlayers = new Player[nextRoundPlayers];
-        Player[] currRoundPlayers = Arrays.copyOfRange(players,players.length - nextRoundPlayers *2, players.length);
-        Player[] remainingPlayers = generateNextRoundPlayers(generatePairs(currRoundPlayers));
-        for(int i=0; i<nextRoundPlayers-remainingPlayers.length; i++) {
-            newPlayers[i] = players[i];
-        }
-        for(int i=nextRoundPlayers-remainingPlayers.length; i<nextRoundPlayers; i++ ) {
-            int ind = 0;
-            newPlayers[i] = remainingPlayers[ind];
-            ind++;
-        }
+        int availablePlayerNumber = players.length;
+        int nextRoundPlayerNumber = closestLowerPowOfTwo(players.length);
+        int currRoundPlayerNumber = (availablePlayerNumber - nextRoundPlayerNumber) * 2;
 
-        return newPlayers;
+        Player[] currRoundPlayers = new Player[currRoundPlayerNumber];
+        Player[] nextRoundPlayers = new Player[nextRoundPlayerNumber];
+
+        System.arraycopy(players,
+                availablePlayerNumber - currRoundPlayerNumber,
+                currRoundPlayers,
+                0,
+                currRoundPlayerNumber);
+        Pair [] currentRoundPairs = generatePairs(currRoundPlayers);
+        System.out.println("* Round 1 *");
+        printPairMatchups(currentRoundPairs);
+
+        Player[] currRoundWinners = generateNextRoundPlayers(currentRoundPairs);
+
+        System.arraycopy(players, 0, nextRoundPlayers, 0,availablePlayerNumber - currRoundPlayerNumber);
+        System.arraycopy(currRoundWinners, 0, nextRoundPlayers, availablePlayerNumber - currRoundPlayerNumber, currRoundWinners.length);
+        return nextRoundPlayers;
     }
 
     static void printAllPlayers(Player[] players) {
